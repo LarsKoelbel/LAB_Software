@@ -3,10 +3,11 @@ package task1_drone_swarm;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Test function for the droneSwarm class
+ */
 public class Main {
-    /**
-     * Test function for the droneSwarm class
-     */
+
     public static void main(String[] argv)
     {
 

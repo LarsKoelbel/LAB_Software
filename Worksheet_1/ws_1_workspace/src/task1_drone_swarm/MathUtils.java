@@ -6,10 +6,10 @@
 
 package task1_drone_swarm;
 
+/**
+ * This function is used to linearly remap a double value to a new range
+ */
 public class MathUtils {
-    /**
-     * This function is used to linearly remap a double value to a new range
-     */
     public static double remapRangeLinearDouble(double _valueMin, double _valueMax, double _remapMin, double _remapMax, double _value)
     {
 

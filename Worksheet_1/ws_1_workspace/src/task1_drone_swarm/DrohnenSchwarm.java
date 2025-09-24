@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class is used to store and manage data from the drone swarm
+ */
 public class DrohnenSchwarm {
-    /**
-     * This class is used to store and manage data from the drone swarm
-     */
+
 
     /**
      * The array stores the following data:
