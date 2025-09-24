@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"task4_classes_objects","l":"Kraftfahrzeug"},{"p":"task4_classes_objects","l":"Main"}];updateSearchResults();

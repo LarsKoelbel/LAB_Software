@@ -1,8 +1,3 @@
-/**
- * This file contains the DrohnenSchwarm class
- * @author lkoelbel
- * mat-nr: 21487
- */
 
 package task1_drone_swarm;
 
@@ -12,6 +7,8 @@ import java.util.Random;
 
 /**
  * This class is used to store and manage data from the drone swarm
+ *  * @author lkoelbel
+ *  * @matnr: 21487
  */
 public class DrohnenSchwarm {
 
