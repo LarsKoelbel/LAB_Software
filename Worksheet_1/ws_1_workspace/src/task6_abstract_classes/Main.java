@@ -18,5 +18,13 @@ public class Main {
                     autoArr[i].getModel(),
                     autoArr[i].usage(km));
         }
+
+        Fahrzeug[] fahrzeugArr = new Fahrzeug[2];
+        fahrzeugArr[0] = new Kraftfahrzeug ("Golf", 0.065);
+        fahrzeugArr[1] = new Motorrad();
+        for (int j = 0; j < 2; j++)
+        {
+            fahrzeugArr[j].drive();
+        }
     }
 }
