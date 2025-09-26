@@ -5,10 +5,12 @@ set -e
 # Example: zip specific files or directories inside the cloned repo
 # Replace with your actual files/folders
 
-tar -czvf archive.tar.gz ./*
+tar -czvf archive.tar.gz ./Worksheet*
 
 # Absolute path to target directory
-TARGET_DIR="/var/lib/jenkins/hochschule(lab-software/"
+TARGET_DIR="./delivery/"
+
+rm -rr $TARGET_DIR
 
 mkdir -p $TARGET_DIR
 
