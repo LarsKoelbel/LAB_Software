@@ -10,7 +10,7 @@ tar -czvf archive.tar.gz ./Worksheet*
 # Absolute path to target directory
 TARGET_DIR="./delivery/"
 
-rm -rr $TARGET_DIR
+rm -rf $TARGET_DIR || true
 
 mkdir -p $TARGET_DIR
 
