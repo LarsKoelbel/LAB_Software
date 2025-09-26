@@ -30,7 +30,7 @@ for worksheet_dir in ./Worksheet*/; do
     # Create the tar.gz archive
     tarball_name="${base_name}.tar.gz"
     echo "Packing workspace $workspace_dir @ $tarball_name ...\n" >> "$LOGFILE"
-    tar -czvf "$tarball_name" "$workspace_dir"
+    tar -czvf "$tarball_name" -C "$worksheet_dir" "$workspace_dir"
 
     # Copy it into the delivery directory
     mv "$tarball_name" "$TARGET_DIR/"
