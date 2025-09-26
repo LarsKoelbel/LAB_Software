@@ -33,6 +33,6 @@ for worksheet_dir in ./Worksheet*/; do
 
     # Copy it into the delivery directory
     mv "$tarball_name" "$TARGET_DIR/"
-    mv "$LOGFILE" "$TARGET_DIR/"
+    mv "$LOGFILE" "$TARGET_DIR/" || true
     echo "✅ $tarball_name copied to $TARGET_DIR"
 done
