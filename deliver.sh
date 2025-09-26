@@ -9,6 +9,8 @@ TARGET_DIR="./delivery/"
 rm -rf "$TARGET_DIR" || true
 mkdir -p "$TARGET_DIR"
 
+LOGFILE="jenkins.log"
+
 # Loop through each ./Worksheet* directory
 for worksheet_dir in ./Worksheet*/; do
     # Ensure it's a directory
@@ -18,7 +20,7 @@ for worksheet_dir in ./Worksheet*/; do
     workspace_dir=$(find "$worksheet_dir" -maxdepth 1 -type d -iname "*workspace*" | head -n 1)
 
     if [ -z "$workspace_dir" ]; then
-        echo "⚠️ No workspace directory found in $worksheet_dir. Skipping."
+        echo "⚠️ No workspace directory found in $worksheet_dir. Skipping." >> "$LOGFILE"
         continue
     fi
 
@@ -27,9 +29,10 @@ for worksheet_dir in ./Worksheet*/; do
 
     # Create the tar.gz archive
     tarball_name="${base_name}.tar.gz"
-    tar -czvf "$tarball_name" -C "$workspace_dir" "$(basename "$workspace_dir")"
+    tar -czvf "$tarball_name" "$workspace_dir"
 
     # Copy it into the delivery directory
     mv "$tarball_name" "$TARGET_DIR/"
+    mv "$LOGFILE" "$TARGET_DIR/"
     echo "✅ $tarball_name copied to $TARGET_DIR"
 done
