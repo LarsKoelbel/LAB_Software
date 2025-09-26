@@ -25,7 +25,7 @@ for worksheet_dir in ./Worksheet*/; do
     fi
 
     # Extract the name from the workspace directory
-    base_name=$(basename "$workspace_dir")
+    base_name=$workspace_dir"
 
     # Create the tar.gz archive
     tarball_name="${base_name}.tar.gz"
