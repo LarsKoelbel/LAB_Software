@@ -22,14 +22,14 @@ for worksheet_dir in ./Worksheet*/; do
         continue
     fi
 
-    # Extract the name from the Worksheet directory (e.g., Worksheet1)
-    base_name=$(basename "$worksheet_dir")
+    # Extract the name from the workspace directory
+    base_name=$(basename "$workspace_dir")
 
     # Create the tar.gz archive
     tarball_name="${base_name}.tar.gz"
-    tar -czvf "$tarball_name" -C "$worksheet_dir" "$(basename "$workspace_dir")"
+    tar -czvf "$tarball_name" -C "$workspace_dir" "$(basename "$workspace_dir")"
 
     # Copy it into the delivery directory
-    cp "$tarball_name" "$TARGET_DIR/"
+    mv "$tarball_name" "$TARGET_DIR/"
     echo "✅ $tarball_name copied to $TARGET_DIR"
 done
