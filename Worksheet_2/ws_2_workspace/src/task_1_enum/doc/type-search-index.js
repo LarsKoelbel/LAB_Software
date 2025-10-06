@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"task_1_enum","l":"IPrintable"},{"p":"task_1_enum","l":"Main"},{"p":"task_1_enum","l":"Ticket"},{"p":"task_1_enum","l":"TicketMachine"},{"p":"task_1_enum","l":"TicketType"},{"p":"task_1_enum","l":"TicketUtils"},{"p":"task_1_enum","l":"Zone"}];updateSearchResults();
