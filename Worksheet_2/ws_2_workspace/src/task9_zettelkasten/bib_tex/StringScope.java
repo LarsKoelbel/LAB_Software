@@ -8,6 +8,7 @@ import java.util.List;
 public class StringScope {
     private String key = null;
     private List<StringScope> innerStringScopes = null;
+    private String content = null;
 
     public String getKey() {
         return key;
@@ -24,6 +25,15 @@ public class StringScope {
 
     public StringScope setInnerStringScopes(List<StringScope> _innerStringScopes) {
         this.innerStringScopes = _innerStringScopes;
+        return this;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public StringScope setContent(String _content) {
+        this.content = _content;
         return this;
     }
 }

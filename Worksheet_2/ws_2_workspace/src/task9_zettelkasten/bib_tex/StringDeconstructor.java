@@ -38,10 +38,21 @@ public class StringDeconstructor {
                     buffer.deleteCharAt(0);
                 }
                 this.content = buffer.toString();
+                if (this.content.isEmpty()) return null;
                 return result.toString();
             }
         }
 
         return null;
+    }
+
+    /**
+     * Get the remaining String content as a string
+     * @return Remining string content
+     */
+    @Override
+    public String toString()
+    {
+        return this.content;
     }
 }
