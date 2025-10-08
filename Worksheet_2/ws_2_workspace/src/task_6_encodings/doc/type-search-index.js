@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"task_6_encodings","l":"Main"},{"p":"task_6_encodings","l":"NumberSystem"}];updateSearchResults();

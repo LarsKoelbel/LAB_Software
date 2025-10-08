@@ -1,0 +1,77 @@
+Ergebnis mit utf-8
+
+Byte    | Bedeutung
+68      | char 'D'
+105     | char 'i'
+101     | char 'e'
+32      | char ' ' [SPACE]
+87|     | char 'W
+101     | char 'e
+108     | char 'l
+116     | char 't
+32      | char ' '
+107     | char 'k
+111     | char 'o
+115     | char 's
+116     | char 't
+101     | char 'e
+116     | char 't
+32      | char ' '
+49      | char '1
+55      | char '3
+32      | char ' '
+226     | € == 0xE282AC (3 Byte) | höchstes byte (226) [111]00010 (Die ersten 3 bit ziegen die Länge des gesamten codes für ein Zeichen)
+130     | € == 0xE282AC (3 Byte) | nächstes byte (130) 10000010
+172     | € == 0xE282AC (3 Byte) | niedrigstes byte (172) 10101100
+13      | char '\r' [Carriage return]
+10      | char '\n' [Newline]
+
+Ergebnis mit utf-16
+
+Byte    | Bedeutung
+254     | Big endian byte order mark
+255     | Big endian byte order mark
+0       | Empty high byte
+68      | char 'D'
+0       | Empty high byte
+105     | char 'i'
+0       | Empty high byte
+101     | char 'e'
+0       | Empty high byte
+32      | char ' '
+0       | Empty high byte
+87      | char 'W'
+0       | Empty high byte
+101     | char 'e'
+0       | Empty high byte
+108     | char 'l'
+0       | Empty high byte
+116     | char 't'
+0       | Empty high byte
+32      | char ' '
+0       | Empty high byte
+107     | char 'k'
+0       | Empty high byte
+111     | char 'o'
+0       | Empty high byte
+115     | char 's'
+0       | Empty high byte
+116     | char 't'
+0       | Empty high byte
+101     | char 'e'
+0       | Empty high byte
+116     | char 't'
+0       | Empty high byte
+32      | char ' '
+0       | Empty high byte
+49      | char '1'
+0       | Empty high byte
+55      | char '7'
+0       | Empty high byte
+32      | char ' '
+32      | High byte for the € [0x20] 0xAC
+172     | Low byte for the € 0x20 [0xAC]
+0       | Empty high byte
+13      | char '\r'
+0       | Empty high byte
+10      | char '\n'
