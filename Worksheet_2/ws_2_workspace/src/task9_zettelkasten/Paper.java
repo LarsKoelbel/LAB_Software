@@ -1,5 +1,10 @@
 package task9_zettelkasten;
 
+import task9_zettelkasten.bib_tex.BibTexParameter;
+import task9_zettelkasten.bib_tex.BibTexStruct;
+import task9_zettelkasten.io.Communication;
+import task9_zettelkasten.io.Severity;
+
 /**
  * This class is used to represent a paper (newspaper) storage medium
  * @author lkoelbel
@@ -51,5 +56,26 @@ public class Paper extends Medium{
         sp.append("Number: ").append(getNumber());
 
         return sp.toString();
+    }
+
+    /**
+     * Parse values from a BibTex struct object
+     * @param _bibTexStruct BibTex struct to parse from
+     */
+    public Paper parseFromBibTexStruct(BibTexStruct _bibTexStruct)
+    {
+        for (BibTexParameter bibTexParameter : _bibTexStruct.getParameterList())
+        {
+            switch (bibTexParameter.getName().toLowerCase().strip()){
+                case "title" -> setTitle(bibTexParameter.getSvalue());
+                case "issn" -> setISSN(bibTexParameter.getSvalue());
+                case "volume" -> setVolume((int) bibTexParameter.getFvalue());
+                case "number" -> setNumber((int) bibTexParameter.getFvalue());
+                default -> Communication.writeToGlobalOutputBuffer("Parameter " + bibTexParameter.getName() + " is not available for type Paper", Severity.WARNING);
+
+            }
+        }
+
+        return this;
     }
 }

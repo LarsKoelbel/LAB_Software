@@ -49,7 +49,7 @@ public class BibTexStruct {
             case "cd":
                 this.type = BibTexType.CD;
                 break;
-            case "elMed":
+            case "elmed":
                 this.type = BibTexType.EL_MED;
                 break;
             default:
@@ -81,8 +81,8 @@ public class BibTexStruct {
 
                 parameterStringBuilder.append(c);
 
-                if (i >= _input.length() - 1) throw new BibTexException("Parameter delimiter exception", "The query " + _input + " cant be parsed correctly." +
-                        "Most likely a baked ore comma war misplaced in the parameter starting at " + absoluteParsePosition);
+                if (i >= _input.length() - 1) throw new BibTexException("Parameter delimiter exception", "The query " + _input + " cant be parsed correctly. " +
+                        "Most likely a baked ore comma was misplaced in the parameter starting at index" + absoluteParsePosition);
             }
 
             String parameterString = parameterStringBuilder.toString();

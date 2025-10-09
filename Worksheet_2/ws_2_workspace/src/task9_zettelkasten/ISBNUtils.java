@@ -24,6 +24,7 @@ public class ISBNUtils {
      */
     public static boolean checkISBNString(String _isbn)
     {
+        _isbn = _isbn.replace("-","");
         // Check the length of the isbn, must be 10 ot 13
         int length = _isbn.length();
         switch (length)

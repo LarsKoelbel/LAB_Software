@@ -1,5 +1,6 @@
 package task9_zettelkasten;
 
+import task9_zettelkasten.bib_tex.BibTexParser;
 import task9_zettelkasten.bib_tex.BibTexStruct;
 import task9_zettelkasten.io.Communication;
 import task9_zettelkasten.io.IGlobalOutputBufferListener;
@@ -24,10 +25,8 @@ public class Library {
 
         try
         {
-            BibTexStruct bibTexStruct = new BibTexStruct().parseFromString("@book{author = {-}, title = {Duden 01. Die deutsche Rechtschreibung}, publisher = {Bibliogr" +
-                    "aphisches Institut, Mannheim}, year = 2004, isbn = {3-411-04013-0}}");
-
-            Communication.writeToGlobalOutputBuffer(bibTexStruct.toString());
+            Medium medium = BibTexParser.parseFromBibTexString("@elMed{something = 3}");
+            System.out.println(medium.generateRepresentation());
         }catch (Exception e)
         {
            if (e instanceof IExceptionUserReadable)

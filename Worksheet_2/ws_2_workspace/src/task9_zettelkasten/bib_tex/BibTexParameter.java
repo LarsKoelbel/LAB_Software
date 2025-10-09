@@ -5,7 +5,7 @@ package task9_zettelkasten.bib_tex;
  */
 public class BibTexParameter {
     private String name = null;
-    private Double fvalue = null;
+    private double fvalue = 0;
     private String svalue = null;
     private BibTexParameterType type = null;
 
@@ -18,7 +18,7 @@ public class BibTexParameter {
         return this;
     }
 
-    public Double getFvalue() {
+    public double getFvalue() {
         return fvalue;
     }
 
