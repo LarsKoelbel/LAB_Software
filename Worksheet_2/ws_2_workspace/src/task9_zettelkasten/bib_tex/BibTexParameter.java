@@ -44,4 +44,30 @@ public class BibTexParameter {
         this.type = _type;
         return this;
     }
+
+    /**
+     * Generate a string representation of the parameter
+     * @return String representation of the parameter
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        if (this.type == null) {
+            sb.append("Parameter has not jet been initialized");
+            return sb.toString();
+        }
+
+        sb.append("\tBibTex parameter of type ")
+                .append(this.type.toString())
+                .append("\n\t")
+                .append("Name: ")
+                .append(this.name)
+                .append("\n\t")
+                .append("Numeric Value: ").append(fvalue).append("\n\t")
+                .append("String Value: ").append(svalue).append("\n");
+
+        return sb.toString();
+    }
 }

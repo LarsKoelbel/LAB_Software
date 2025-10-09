@@ -1,0 +1,45 @@
+package task9_zettelkasten.io;
+
+import java.net.HttpRetryException;
+import java.sql.Time;
+import java.sql.Timestamp;
+
+/**
+ * Clas representing a message
+ */
+public class Message {
+    private String message;
+    private Severity severity;
+    private long timestamp;
+
+    /**
+     * Constructor for a new message
+     * @param _message Message content
+     * @param _severity Severity of the message
+     */
+    public Message(String _message, Severity _severity)
+    {
+        this.message = _message;
+        this.severity = _severity;
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Severity getSeverity() {
+        return severity;
+    }
+
+    public long getTimestamp()
+    {
+        return this.timestamp;
+    }
+
+    /**
+     * To string methode gets the content of the message
+     * @return Message content
+     */
+    @Override
+    public String toString()
+    {
+        return this.message;
+    }
+}
