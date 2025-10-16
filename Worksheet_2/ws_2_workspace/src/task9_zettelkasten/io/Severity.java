@@ -11,6 +11,7 @@ public enum Severity {
     FATAL(3);
 
     private int level;
+    private static final int HIGHEST_SEVERITY = 3;
 
     /**
      * Construct to set a level (comparable)
@@ -31,6 +32,6 @@ public enum Severity {
      */
     public static int highestSeverity()
     {
-        return 3;
+        return HIGHEST_SEVERITY;
     }
 }
