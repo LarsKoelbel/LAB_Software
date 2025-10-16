@@ -83,7 +83,7 @@ public class BibTexStruct {
                 parameterStringBuilder.append(c);
 
                 if (i >= _input.length() - 1) throw new BibTexException("Parameter delimiter exception", "The query " + _input + " cant be parsed correctly. " +
-                        "Most likely a baked ore comma was misplaced in the parameter starting at index" + absoluteParsePosition);
+                        "Most likely a braked or comma was misplaced in the parameter starting at index " + absoluteParsePosition);
             }
 
             String parameterString = parameterStringBuilder.toString();
