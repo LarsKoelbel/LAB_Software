@@ -4,6 +4,7 @@ import task9_zettelkasten.IExceptionUserReadable;
 
 /**
  * Exception for runtime errors inside the bibtex module
+ * @author lkoelbel 21487
  */
 public class BibTexException extends RuntimeException implements IExceptionUserReadable {
   private String userMessage = null;

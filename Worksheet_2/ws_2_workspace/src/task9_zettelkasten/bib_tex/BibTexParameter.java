@@ -2,6 +2,7 @@ package task9_zettelkasten.bib_tex;
 
 /**
  * Class representing a bibtex parameter inside the bibtex struct
+ * @author lkoelbel 21487
  */
 public class BibTexParameter {
     private String name = null;

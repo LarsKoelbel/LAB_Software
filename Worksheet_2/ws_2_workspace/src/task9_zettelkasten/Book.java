@@ -92,7 +92,7 @@ public class Book extends Medium{
                 case "publisher" -> setPublicher(bibTexParameter.getSvalue());
                 case "year" -> setYearOfPublishing((int) bibTexParameter.getFvalue());
                 case "isbn" -> setISBN(bibTexParameter.getSvalue());
-                default -> Communication.writeToGlobalOutputBuffer("Parameter " + bibTexParameter.getName() + " is not available for type Book", Severity.WARNING);
+                default -> Communication.writeToProcessOutputBuffer("bib-tex-parser","Parameter " + bibTexParameter.getName() + " is not available for type Book", Severity.WARNING);
 
             }
         }

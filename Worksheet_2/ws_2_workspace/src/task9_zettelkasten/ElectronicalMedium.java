@@ -55,7 +55,7 @@ public class ElectronicalMedium extends Medium{
             switch (bibTexParameter.getName().toLowerCase().strip()){
                 case "title" -> setTitle(bibTexParameter.getSvalue());
                 case "url" -> setURL(bibTexParameter.getSvalue());
-                default -> Communication.writeToGlobalOutputBuffer("Parameter " + bibTexParameter.getName() + " is not available for type Electronic medium", Severity.WARNING);
+                default -> Communication.writeToProcessOutputBuffer("bib-tex-parser","Parameter " + bibTexParameter.getName() + " is not available for type Electronic medium", Severity.WARNING);
 
             }
         }

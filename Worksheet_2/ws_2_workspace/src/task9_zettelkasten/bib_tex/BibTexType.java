@@ -2,6 +2,7 @@ package task9_zettelkasten.bib_tex;
 
 /**
  * Type of bibtex (e.g. book or journal)
+ * @author lkoelbel 21487
  */
 public enum BibTexType {
     BOOK,

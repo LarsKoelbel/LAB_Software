@@ -2,6 +2,7 @@ package task9_zettelkasten;
 
 /**
  * Interface for making an exception supply a user readable error message
+ * @author lkoelbel 21487
  */
 public interface IExceptionUserReadable {
     /**

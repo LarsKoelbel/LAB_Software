@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Main {
     /**
-     * Main methode
+     * Main methode for reading data from a file
      * @param argv Arguments form the command line
      */
     public static void main(String[] argv)

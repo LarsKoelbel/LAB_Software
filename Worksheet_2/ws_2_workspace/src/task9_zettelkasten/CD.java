@@ -59,7 +59,7 @@ public class CD extends Medium{
                 case "title" -> setTitle(bibTexParameter.getSvalue());
                 case "label" -> setLable(bibTexParameter.getSvalue());
                 case "artist" -> setArtist(bibTexParameter.getSvalue());
-                default -> Communication.writeToGlobalOutputBuffer("Parameter " + bibTexParameter.getName() + " is not available for type CD", Severity.WARNING);
+                default -> Communication.writeToProcessOutputBuffer("bib-tex-parser","Parameter " + bibTexParameter.getName() + " is not available for type CD", Severity.WARNING);
 
             }
         }

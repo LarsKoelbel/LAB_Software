@@ -2,10 +2,7 @@ package task9_zettelkasten;
 
 import task9_zettelkasten.bib_tex.BibTexParser;
 import task9_zettelkasten.bib_tex.BibTexStruct;
-import task9_zettelkasten.io.Communication;
-import task9_zettelkasten.io.IGlobalOutputBufferListener;
-import task9_zettelkasten.io.Message;
-import task9_zettelkasten.io.Severity;
+import task9_zettelkasten.io.*;
 
 /**
  * Main class for managing the library
@@ -21,22 +18,37 @@ public class Library {
             public void onGlobalOutputBufferUpdate(Message _lastMessage) {
                 System.out.println(_lastMessage.getSeverity() + ": " + _lastMessage.toString());
             }
+
+            @Override
+            public void onProcessOutputBufferClose(ProcessOutputBuffer _processOutputBuffer, String _key) {
+
+                System.out.println("-------- Process end for " + _key + " --------");
+                Message mostSevere = _processOutputBuffer.getMostSevere();
+                System.out.println("Process exited with severity " + mostSevere.getSeverity() + ": ");
+                System.out.println("\t" + mostSevere);
+                System.out.println(_processOutputBuffer);
+            }
         });
 
+
+        Communication.acquireProcessOutputBuffer("bib-tex-parser");
         try
         {
-            Medium medium = BibTexParser.parseFromBibTexString("@elMed{something = 3}");
-            System.out.println(medium.generateRepresentation());
+            Medium medium = BibTexParser.parseFromBibTexString("@elMed{something = 4}");
+            Communication.writeToProcessOutputBuffer("bib-tex-parser",
+                    "Result: \n" + medium.generateRepresentation());
         }catch (Exception e)
         {
            if (e instanceof IExceptionUserReadable)
            {
-               Communication.writeToGlobalOutputBuffer(((IExceptionUserReadable) e).getUserMessage(), Severity.ERROR);
+               Communication.writeToProcessOutputBuffer("bib-tex-parser",((IExceptionUserReadable) e).getUserMessage(), Severity.ERROR);
            }else
            {
-               e.printStackTrace();
+               Communication.writeToProcessOutputBuffer("bib-tex-parser", e.toString(), Severity.FATAL);
            }
         }
+
+        Communication.processOutputBufferClose("bib-tex-parser");
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Class representing a bibtex query with a type and parameters
+ * @author lkoelbel 21487
  */
 public class BibTexStruct {
 

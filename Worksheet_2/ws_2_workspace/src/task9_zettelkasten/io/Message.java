@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 /**
  * Clas representing a message
+ * @author lkoelbel 21487
  */
 public class Message {
     private String message;

@@ -71,7 +71,7 @@ public class Paper extends Medium{
                 case "issn" -> setISSN(bibTexParameter.getSvalue());
                 case "volume" -> setVolume((int) bibTexParameter.getFvalue());
                 case "number" -> setNumber((int) bibTexParameter.getFvalue());
-                default -> Communication.writeToGlobalOutputBuffer("Parameter " + bibTexParameter.getName() + " is not available for type Paper", Severity.WARNING);
+                default -> Communication.writeToProcessOutputBuffer("bib-tex-parser","Parameter " + bibTexParameter.getName() + " is not available for type Paper", Severity.WARNING);
 
             }
         }

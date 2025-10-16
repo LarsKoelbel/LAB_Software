@@ -5,6 +5,7 @@ import task9_zettelkasten.io.Communication;
 
 /**
  * Class for parsing a media object from a bib tex string
+ * @author lkoelbel 21487
  */
 public class BibTexParser {
 
@@ -25,7 +26,7 @@ public class BibTexParser {
             case BibTexType.CD -> medium = new CD().parseFromBibTexStruct(bibTexStruct);
             case BibTexType.EL_MED -> medium = new ElectronicalMedium().parseFromBibTexStruct(bibTexStruct);
             case BibTexType.JOURNAL -> medium = new Paper().parseFromBibTexStruct(bibTexStruct);
-            default -> Communication.writeToGlobalOutputBuffer("The type " + bibTexStruct.getType() + " in not (yet) supported");
+            default -> Communication.writeToProcessOutputBuffer("bib-tex-parser","The type " + bibTexStruct.getType() + " in not (yet) supported");
         }
 
         return medium;
