@@ -6,11 +6,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Main class for the dws application
+ * @author lkoelbel 21487
+ */
 public class DWS {
 
     /**
-     * Main class for the dws application
-     * @author lkoelbel 21487
+     * Mein methode
+     * @param args Console arguments
      */
     public static void main(String[] args) {
         getResultsOfYear(2019);
