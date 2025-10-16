@@ -29,10 +29,9 @@ public class DWS {
         try {
             BufferedReader in = new BufferedReader(new FileReader("./src/task_8_dws/DWS-TOP-DIVIDENDE.csv"));
 
-            // die ersten sechs Zeilen überlesen
+            // die ersten sechs Zeilen überspringen
             int cnt = 0;
-            while (in.readLine() != null && cnt < 7) {
-                in.readLine();
+            while (in.readLine() != null && cnt < 6) {
                 cnt++;
             }
 
