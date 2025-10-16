@@ -34,7 +34,8 @@ public class Library {
         Communication.acquireProcessOutputBuffer("bib-tex-parser");
         try
         {
-            Medium medium = BibTexParser.parseFromBibTexString("@elMed{something = 4}");
+            Medium medium = BibTexParser.parseFromBibTexString("@book{author = {-}, title = {Duden 01. Die deutsche Rechtschreibung}, publisher = {Bibliogr" +
+                    "aphisches Institut, Mannheim}, year = 2004, isbn = {3-411-04013-0}}");
             Communication.writeToProcessOutputBuffer("bib-tex-parser",
                     "Result: \n" + medium.generateRepresentation());
         }catch (Exception e)

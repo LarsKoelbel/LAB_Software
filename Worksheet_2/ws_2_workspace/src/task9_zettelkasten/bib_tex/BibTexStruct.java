@@ -89,6 +89,7 @@ public class BibTexStruct {
             String parameterString = parameterStringBuilder.toString();
 
             if(!parameterString.contains("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has no '=' and therefore cant be parsed");
+            if(parameterString.indexOf("=") != parameterString.lastIndexOf("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has more than one '=' and therefore cant be parsed. Most likely a coma is missing after the parameter");
             String[] splitParameter = parameterString.split("=");
 
             String name = splitParameter[0];
