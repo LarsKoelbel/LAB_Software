@@ -22,7 +22,12 @@ public class BibTexStruct {
     {
         int absoluteParsePosition = 0;
 
-        if (!_input.startsWith("@")) throw new BibTexException("Prefix error", "The input " + _input + " is not a valide Bibtex command: Prefix '@' not found");
+        // Check if the string start with an @
+
+        if (!_input.startsWith("@")) throw new BibTexException("Prefix error", "The input " + _input + " is not a valide Bibtex command: Prefix '@' not found"
+                + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));
+
+        // Get the type of the struct
 
         StringBuilder type = new StringBuilder();
 
@@ -33,7 +38,8 @@ public class BibTexStruct {
                 absoluteParsePosition = i + 1;
                 break;
             }
-            if (c == '}') throw new BibTexException("Scope error", "Cant parse bibtex type. Most likely a braced was misplaced at index " + i);
+            if (c == '}') throw new BibTexException("Scope error", "Cant parse bibtex type. Most likely a braced was misplaced at index " + i
+                    + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));
             type.append(c);
         }
 
@@ -54,7 +60,8 @@ public class BibTexStruct {
                 this.type = BibTexType.EL_MED;
                 break;
             default:
-                throw new BibTexException("type error", type_name + " is not a valid bibtex type");
+                throw new BibTexException("type error", type_name + " is not a valid bibtex type"
+                        + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));
         }
 
         // Extract parameters
@@ -83,14 +90,11 @@ public class BibTexStruct {
                 parameterStringBuilder.append(c);
 
                 if (i >= _input.length() - 1) throw new BibTexException("Parameter delimiter exception", "The query " + _input + " cant be parsed correctly. " +
-                        "Most likely a braked or comma was misplaced in the parameter starting at index " + absoluteParsePosition);
+                        "Most likely a braked or comma was misplaced in the parameter starting at index " + absoluteParsePosition
+                + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));
             }
 
-            String parameterString = parameterStringBuilder.toString();
-
-            if(!parameterString.contains("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has no '=' and therefore cant be parsed");
-            if(parameterString.indexOf("=") != parameterString.lastIndexOf("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has more than one '=' and therefore cant be parsed. Most likely a coma is missing after the parameter");
-            String[] splitParameter = parameterString.split("=");
+            String[] splitParameter = getStrings(parameterStringBuilder, _input, absoluteParsePosition);
 
             String name = splitParameter[0];
             String value = splitParameter[1];
@@ -108,7 +112,8 @@ public class BibTexStruct {
                     this.parameterList.add(new BibTexParameter().setName(name).setFvalue(fvalue).setType(parmType));
                 }catch (NumberFormatException _)
                 {
-                    throw new BibTexException("Parameter type exception", "The value " + value + " for the parameter " + name + " is not a valide numerical value. Use name = {value} for string parameters.");
+                    throw new BibTexException("Parameter type exception", "The value " + value + " for the parameter " + name + " is not a valide numerical value. Use name = {value} for string parameters."
+                            + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));
                 }
             }else
             {
@@ -119,6 +124,24 @@ public class BibTexStruct {
         }
 
         return this;
+    }
+
+    /**
+     * Get a string array representing a parameter of the structure: name = value as [name, value]
+     * @param parameterStringBuilder String builder containing the parameter string
+     * @param _input Complete query (used for error messages)
+     * @param _pos Parse position (used for error messages)
+     * @return Split string
+     */
+    private static String[] getStrings(StringBuilder parameterStringBuilder, String _input, int _pos) {
+        String parameterString = parameterStringBuilder.toString();
+
+        if(!parameterString.contains("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has no '=' and therefore cant be parsed"
+                + BibTexException.getTexPositionMarkerForError(_input, _pos));
+        if(parameterString.indexOf("=") != parameterString.lastIndexOf("=")) throw new BibTexException("Parameter exception", "The parameter " + parameterString + " has more than one '=' and therefore cant be parsed. Most likely a coma is missing after the parameter"
+                + BibTexException.getTexPositionMarkerForError(_input, _pos));
+        String[] splitParameter = parameterString.split("=");
+        return splitParameter;
     }
 
     /**

@@ -26,9 +26,11 @@ public class Library {
                 Message mostSevere = _processOutputBuffer.getMostSevere();
                 if (mostSevere.getSeverity().getLevel() > Severity.BASIC.getLevel()){
                     System.out.println("Process exited with severity " + mostSevere.getSeverity() + ": ");
-                    System.out.println("\t" + mostSevere);
+                    System.out.println(mostSevere);
+                }else
+                {
+                    System.out.println(_processOutputBuffer);
                 }
-                System.out.println(_processOutputBuffer);
             }
         });
 

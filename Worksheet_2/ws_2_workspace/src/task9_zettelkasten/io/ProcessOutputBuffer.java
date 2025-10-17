@@ -60,7 +60,7 @@ public class ProcessOutputBuffer {
         sb.append("######################################\n");
         for (Message m : this.buffer)
         {
-            sb.append(m.getSeverity()).append(": ").append(m).append("\n");
+            sb.append(m.getSeverity()).append(": \n").append(m).append("\n");
         }
         sb.append("######################################\n");
 

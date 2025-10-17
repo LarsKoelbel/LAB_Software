@@ -18,4 +18,19 @@ public class BibTexException extends RuntimeException implements IExceptionUserR
   public String getUserMessage() {
     return userMessage;
   }
+
+  /**
+   * Get a string with an arrow showing the location of an error is a string
+   * @param _input The string in question
+   * @param _index The index the arrow should be placed at
+   * @return The complete string with the arrow
+   */
+  public static String getTexPositionMarkerForError(String _input, int _index)
+  {
+      StringBuilder sb = new StringBuilder("\n");
+      sb.append(_input).append("\n");
+      sb.append(String.valueOf(' ').repeat(_index)).append("^").append("\n");
+
+      return sb.toString();
+  }
 }
