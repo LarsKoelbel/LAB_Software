@@ -8,6 +8,7 @@ import java.util.Iterator;
  * @author lkoebel 21487
  */
 public class Family implements Iterable<String>{
+
     private ArrayList<String> names = new ArrayList<>();
 
     /**
