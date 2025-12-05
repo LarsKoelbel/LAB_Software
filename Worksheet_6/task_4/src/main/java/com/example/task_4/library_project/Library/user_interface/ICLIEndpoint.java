@@ -1,0 +1,23 @@
+package com.example.task_4.library_project.Library.user_interface;
+
+import com.example.task_4.library_project.Library.io.ProcessOutputBuffer;
+
+/**
+* Endpoint for a cli path (usually a function)
+* @author lkoeble 21487
+*/
+public interface ICLIEndpoint {
+    /**
+     * Function to be called by the CLI
+     * @param params Parameters from the cli
+     * @param _out Output buffer
+     * @param _cli The cli calling the endpoint
+     */
+    void call(String[] params, ProcessOutputBuffer _out, CLI _cli);
+
+    /**
+     * Get the name of the running process
+     * @return Process name
+     */
+    String getProcessName();
+}
