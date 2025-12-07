@@ -3,6 +3,7 @@ package com.example.task_4.library_project.Library.user_interface;
 import com.example.task_4.library_project.Library.io.Message;
 import com.example.task_4.library_project.Library.io.ProcessOutputBuffer;
 import com.example.task_4.library_project.Library.io.Severity;
+import com.example.task_4.library_project.Library.user_interface.cli_commands.*;
 import com.example.task_4.library_project.Library.utils.IColorCodes;
 import com.example.task_4.library_project.Library.utils.TextUtils;
 
@@ -30,6 +31,45 @@ public class CLI {
 
     private static final ArrayList<String> HISTORY = new ArrayList<>();
 
+    private static final ArrayList<String> KNOWN_PATHS = new ArrayList<>();
+
+    /**
+     * Initialize the cli and register all commands (previously handled by the library class)
+     */
+    public void init()
+    {
+        this.initElementaryCommands();
+
+        // List command - list all mediums
+        this.registerEndpoint(new List(), "list");
+        // List search
+        this.registerEndpoint(new Search(), "search");
+        // Modify status
+        this.registerEndpoint(new StatusSet(), "status set");
+        // Add command - add new BibTex Medium
+        this.registerEndpoint(new Add(), "add");
+        // Save binary
+        this.registerEndpoint(new SaveBinary(),"save binary");
+        // Save bibtex
+        this.registerEndpoint(new SaveBibtex(), "save bibtex");
+        // Load binary
+        this.registerEndpoint(new LoadBinary(),"load binary");
+        // Load bibtex
+        this.registerEndpoint(new LoadBibtex(),"load bibtex");
+        // Load server
+        this.registerEndpoint(new LoadDatabase(),"load database");
+        // Clear list
+        this.registerEndpoint(new Clear(), "clear");
+        // Drop
+        this.registerEndpoint(new Drop(), "drop");
+        // Connect server
+        this.registerEndpoint(new ConnectDatabaseServer(), "connect database-server");
+        // Disconnect server
+        this.registerEndpoint(new DisconnectDatabaseServer(), "disconnect database-server");
+        // WikiBooks
+        this.registerEndpoint(new WikiBooks(), "wikibooks");
+    }
+
     /**
      * Add a new endpoint (command) to the cli
      * @param _endpoint Endpoint object
@@ -49,6 +89,7 @@ public class CLI {
         current.set(_endpoint);
 
         HISTORY.add(String.format(Locale.ENGLISH, "%s :: " + TextUtils.style("Registered new endpoint", IColorCodes.PURPLE) + " :: %s", LocalDate.now(), _path));
+        KNOWN_PATHS.add(_path);
     }
 
     /**
@@ -57,7 +98,7 @@ public class CLI {
      * @param _out Output Buffer
      * @return Success status
      */
-    private boolean call(String _path, ProcessOutputBuffer _out)
+    public boolean call(String _path, ProcessOutputBuffer _out)
     {
         ArrayList<String> path = new ArrayList<>(Arrays.asList(_path.strip().replace("\n", "").split(" ")));
 
@@ -144,11 +185,14 @@ public class CLI {
      */
     public String ask(String _question)
     {
+        // Always return yes (feature disabled)
+        return "y";
+        /*
         HISTORY.add(String.format(Locale.ENGLISH, "%s :: " + TextUtils.style("Call to cli ask", IColorCodes.PURPLE) + " :: %s", LocalDate.now(), _question));
         System.out.print(_question);
         String r = scanner.nextLine();
         HISTORY.add(String.format(Locale.ENGLISH, "%s :: " + TextUtils.style("Ask returned with result", IColorCodes.PURPLE) + " :: %s", LocalDate.now(), r));
-        return r;
+        return r; */
     }
 
     /**
@@ -331,6 +375,11 @@ public class CLI {
                         _out.write("History is empty");
 
                         break;
+                    }
+                    case "known-paths":
+                    {
+                        _out.write(KNOWN_PATHS.toString());
+                        return;
                     }
                     default:
                     {

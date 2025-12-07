@@ -370,7 +370,7 @@ public class Server {
     }
 
     /**
-     * Test the connection to the server
+     * MultiLangSynonymFetcher the connection to the server
      * @return Status of server connection
      */
     public boolean testConnection()
@@ -390,7 +390,7 @@ public class Server {
     }
 
     /**
-     * Test authentication with the server
+     * MultiLangSynonymFetcher authentication with the server
      * @param _out Process output buffer
      * @return Status
      */

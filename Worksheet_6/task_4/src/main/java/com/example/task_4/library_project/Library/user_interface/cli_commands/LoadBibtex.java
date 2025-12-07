@@ -58,7 +58,7 @@ public class LoadBibtex implements ICLIEndpoint {
                     _out.write("Done", Severity.SUCCESS);
                 }else
                 {
-                    _out.write("Loading canceled", Severity.REMARK);
+                    _out.write("Loading canceled :: Your archive is not empty!", Severity.ERROR);
                 }
             }
 

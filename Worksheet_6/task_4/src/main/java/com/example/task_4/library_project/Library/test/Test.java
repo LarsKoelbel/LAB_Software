@@ -14,7 +14,7 @@ import com.example.task_4.library_project.Library.utils.TextUtils;
 import java.util.Arrays;
 
 /**
- * Test class
+ * MultiLangSynonymFetcher class
  * @author lkoelbel 21487
  */
 public class Test {
@@ -35,7 +35,7 @@ public class Test {
     }
 
     /**
-     * Test text utils
+     * MultiLangSynonymFetcher text utils
      */
     private static void test_textUtils()
     {
@@ -47,7 +47,7 @@ public class Test {
     }
 
     /**
-     * Test database server
+     * MultiLangSynonymFetcher database server
      */
     private static void test_Server()
     {
@@ -72,7 +72,7 @@ public class Test {
     }
 
     /**
-     * Test the collection class
+     * MultiLangSynonymFetcher the collection class
      */
     private static void test_Collection()
     {
@@ -136,7 +136,7 @@ public class Test {
     }
 
     /**
-     * Test the persistency
+     * MultiLangSynonymFetcher the persistency
      */
     private static void test_Persistency()
     {
@@ -211,7 +211,7 @@ public class Test {
     }
 
     /**
-     * Test searching
+     * MultiLangSynonymFetcher searching
      */
     private static void test_Searching()
     {

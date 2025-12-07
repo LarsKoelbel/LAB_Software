@@ -29,6 +29,7 @@ public class BibTexParser {
             case BibTexType.CD -> medium = new CD().parseFromBibTexStruct(bibTexStruct, _out);
             case BibTexType.EL_MED -> medium = new ElectronicalMedium().parseFromBibTexStruct(bibTexStruct, _out);
             case BibTexType.JOURNAL -> medium = new Paper().parseFromBibTexStruct(bibTexStruct, _out);
+            case BibTexType.EL_MED_WIKI -> medium = new ElectronicalMediumWikiBooks().parseFromBibTexStruct(bibTexStruct, _out);
             default -> _out.write("The type " + bibTexStruct.getType() + " in not (yet) supported", Severity.ERROR);
         }
 

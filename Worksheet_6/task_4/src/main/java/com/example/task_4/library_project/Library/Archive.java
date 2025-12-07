@@ -39,7 +39,7 @@ public class Archive implements Iterable<Medium>, Serializable {
      * @param _out Process output buffer
      * @return ID
      */
-    private long getNextID(ProcessOutputBuffer _out)
+    public long getNextID(ProcessOutputBuffer _out)
     {
         // Request an ID from the server if it is connected, else find the best id in the local dataset
         if (Library.server != null)
@@ -72,6 +72,8 @@ public class Archive implements Iterable<Medium>, Serializable {
                     .boxed()
                     .toList());
 
+            System.out.println(IDList);
+            System.out.println(libList);
 
             // Remove all taken
             for (Medium m : libList)
@@ -79,6 +81,8 @@ public class Archive implements Iterable<Medium>, Serializable {
                 long id = m.getInventoryID();
                 IDList.remove(id);
             }
+
+            System.out.println(IDList);
 
             IDList.sort((a,b) -> Math.toIntExact(a-b));
 

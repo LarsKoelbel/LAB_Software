@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
-* Test class for the WikiBooks fetcher and parser
+* MultiLangSynonymFetcher class for the WikiBooks fetcher and parser
 * @author lkoeble 21487
 */
 public class WikiBooksTest {

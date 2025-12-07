@@ -6,6 +6,7 @@ module com.example.task_4 {
     requires org.json;
 
 
+
     opens com.example.task_4 to javafx.fxml;
     exports com.example.task_4;
 }

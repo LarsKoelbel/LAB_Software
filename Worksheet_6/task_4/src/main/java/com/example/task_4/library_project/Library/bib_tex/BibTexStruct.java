@@ -61,6 +61,9 @@ public class BibTexStruct {
             case "elmed":
                 this.type = BibTexType.EL_MED;
                 break;
+            case "elmedwiki":
+                this.type = BibTexType.EL_MED_WIKI;
+                break;
             default:
                 throw new BibTexException("type error", type_name + " is not a valid bibtex type"
                         + BibTexException.getTexPositionMarkerForError(_input, absoluteParsePosition));

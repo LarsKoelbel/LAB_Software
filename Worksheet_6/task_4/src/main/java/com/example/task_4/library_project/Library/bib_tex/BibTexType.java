@@ -11,7 +11,7 @@ public enum BibTexType implements Serializable {
     JOURNAL("journal",1),
     CD("cd",2),
     EL_MED("elMed",3),
-    EL_MED_WIKI("elMed",4),
+    EL_MED_WIKI("elMedWiki",4),
     MEDIUM("-",5);
 
     private String regex;

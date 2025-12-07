@@ -1,0 +1,15 @@
+module:com.example.task_4
+com.example.task_4
+com.example.task_4.library_project.Elements
+com.example.task_4.library_project.Library
+com.example.task_4.library_project.Library.bib_tex
+com.example.task_4.library_project.Library.database
+com.example.task_4.library_project.Library.io
+com.example.task_4.library_project.Library.Medium
+com.example.task_4.library_project.Library.persistency
+com.example.task_4.library_project.Library.synonym
+com.example.task_4.library_project.Library.test
+com.example.task_4.library_project.Library.user_interface
+com.example.task_4.library_project.Library.user_interface.cli_commands
+com.example.task_4.library_project.Library.utils
+com.example.task_4.library_project.Library.xml

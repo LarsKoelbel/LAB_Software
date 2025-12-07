@@ -52,4 +52,13 @@ public abstract class TextUtils {
         if (!result.isEmpty()) return result.toArray(new String[0]);
         return null;
     }
+
+    /**
+     * Remove all ANSI styling characters form a string
+     * @param text The string
+     * @return The string without the ansi
+     */
+    public static String stripAnsi(String text) {
+        return text.replaceAll("\u001B\\[[;\\d]*m", "");
+    }
 }

@@ -3,6 +3,7 @@ package com.example.task_4.library_project.Library.persistency;
 import com.example.task_4.library_project.Library.Archive;
 import com.example.task_4.library_project.Library.Medium.Medium;
 import com.example.task_4.library_project.Library.io.Communication;
+import com.example.task_4.library_project.Library.io.ProcessOutputBuffer;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +36,7 @@ public class BibTexPersistency implements IPersistency{
 
     /**
      * Load the collection from a file
+     * Load the collection from a file
      * @param _path Path to the file
      * @return The collection
      * @throws PercistencyException in case of errors
@@ -49,9 +51,10 @@ public class BibTexPersistency implements IPersistency{
             while ((line = in.readLine()) != null)
             {
                 if (line.isBlank()) continue;
-                if (!c.addMedium(line,Communication.NULL_BUFFER))
+                ProcessOutputBuffer out = new ProcessOutputBuffer("Bib-tex-parser-load");
+                if (!c.addMedium(line,out))
                 {
-                    throw new PercistencyException("BibTex Parse exception", "One ore more BibTex lines are faulty");
+                    throw new PercistencyException("BibTex Parse exception", "One ore more BibTex lines are faulty :: " + out);
                 }
             }
 

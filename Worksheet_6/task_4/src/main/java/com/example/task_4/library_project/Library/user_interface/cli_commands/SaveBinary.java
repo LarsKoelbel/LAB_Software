@@ -14,7 +14,7 @@ import com.example.task_4.library_project.Library.user_interface.ICLIEndpoint;
 */
 public class SaveBinary implements ICLIEndpoint {
 
-    public static final String DEFAULT_BINARY_FILE = "src/Library/data/objects.lib.bin";
+    public static final String DEFAULT_BINARY_FILE = "src/main/java/com/example/task_4/library_project/data/objects.lib.bin";
 
     @Override
     public void call(String[] params, ProcessOutputBuffer _out, CLI _cli) {

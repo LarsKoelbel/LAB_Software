@@ -14,7 +14,7 @@ import com.example.task_4.library_project.Library.user_interface.ICLIEndpoint;
 */
 public class SaveBibtex implements ICLIEndpoint {
 
-    public static final String DEFAULT_BIBTEX_FILE = "src/Library/data/objects.lib.bibtex";
+    public static final String DEFAULT_BIBTEX_FILE = "src/main/java/com/example/task_4/library_project/data/objects.lib.bibtex";
 
     @Override
     public void call(String[] params, ProcessOutputBuffer _out, CLI _cli) {

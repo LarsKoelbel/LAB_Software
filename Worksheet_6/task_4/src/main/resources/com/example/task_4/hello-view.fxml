@@ -1,52 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+    DISCLAIMER: Some parts of this FXML layout have been generated, modified, or refined with the assistance of AI.
+-->
+
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
+<?import javafx.scene.control.ComboBox?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.task_4.WikibooksController">
+      fx:controller="com.example.task_4.WikibooksController" fx:id="root">
+
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
 
-    <!-- Top row: input + search -->
-    <HBox spacing="10.0">
-        <children>
-            <Label text="Book name"/>
-            <TextField fx:id="input" onKeyPressed="#onInputKeyPressed" HBox.hgrow="ALWAYS"/>
-            <Button text="Search" onMouseClicked="#onSearchClicked"/>
-        </children>
-    </HBox>
+    <MenuBar VBox.vgrow="NEVER" fx:id="menu">
+        <menus>
+            <Menu text="CLI">
+                <items>
+                    <MenuItem text="Show/ Hide CLI Window" onAction="#onToggleCLI"/>
+                    <MenuItem text="View documentation" onAction="#onCLIDocumentation"/>
+                </items>
+            </Menu>
+            <Menu text="Info">
+                <items>
+                    <MenuItem text="About" onAction="#onInfoAbout"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
 
-    <!-- WebView fills the remaining space -->
-    <WebView fx:id="browser" VBox.vgrow="ALWAYS"/>
+    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS" dividerPositions="0.8">
 
-    <!-- Buttons row -->
-    <HBox spacing="10.0" alignment="CENTER">
-        <children>
-            <Button text="Add" onMouseClicked="#onAddClicked"/>
-            <Button text="Sort" onMouseClicked="#onSortClicked"/>
-            <Button text="Delete" onMouseClicked="#onDeleteClicked"/>
-            <Button text="Save" onMouseClicked="#onSaveClicked"/>
-            <Button text="Load" onMouseClicked="#onLoadClicked"/>
-            <Button text="Import" onMouseClicked="#onImportClicked"/>
-            <Button text="Export" onMouseClicked="#onExportClicked"/>
-        </children>
-    </HBox>
+        <SplitPane orientation="HORIZONTAL" VBox.vgrow="ALWAYS" dividerPositions="0.5">
 
-    <!-- Bottom labels -->
-    <HBox spacing="10.0" alignment="CENTER_LEFT">
-        <children>
-            <Label fx:id="lastChangeDate" HBox.hgrow="ALWAYS"/>
-            <Label fx:id="lastEditor" HBox.hgrow="ALWAYS"/>
-            <Label fx:id="shelf" HBox.hgrow="ALWAYS"/>
-        </children>
-    </HBox>
+            <SplitPane orientation="HORIZONTAL" VBox.vgrow="ALWAYS" dividerPositions="0.5">
+
+                <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-border-color: lightgray; -fx-border-width: 1; -fx-padding:5;">
+                    <Label text="Synonyms" style="-fx-font-weight:bold;"/>
+                    <HBox spacing="10.0">
+                        <Button fx:id="backButton" text="Back" prefWidth="60" onMouseClicked="#onBackClicked"/>
+                        <ComboBox fx:id="synonymComboBox" HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="nextButton" text="Next" prefWidth="60" onMouseClicked="#onNextClicked"/>
+                    </HBox>
+                    <ListView fx:id="synonymListView" VBox.vgrow="ALWAYS" onMouseClicked="#synonymListViewClicked" onKeyPressed="#synonymListViewEnter"/>
+                    <Button fx:id="searchSynonymButton" text="Search Synonym" maxWidth="Infinity" onMouseClicked="#onSearchSynonymClicked"/>
+                </VBox>
+
+                <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-border-color: lightgray; -fx-border-width: 1; -fx-padding:5;">
+                    <Label text="Archive" style="-fx-font-weight:bold;"/>
+                    <HBox spacing="10.0">
+                        <Button fx:id="deleteArchiveButton" text="Delete" HBox.hgrow="ALWAYS" onMouseClicked="#onDeleteClicked"/>
+                        <Button fx:id="addArchiveButton" text="Add" HBox.hgrow="ALWAYS" onMouseClicked="#onAddClicked"/>
+                        <Button fx:id="sortArchiveButton" text="Sort" HBox.hgrow="ALWAYS" onMouseClicked="#onSortClicked"/>
+                    </HBox>
+                    <ListView fx:id="archiveListView" VBox.vgrow="ALWAYS"/>
+                </VBox>
+
+            </SplitPane>
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-border-color: gray; -fx-border-width: 1; -fx-border-radius:5; -fx-padding:5;">
+                <HBox spacing="10.0">
+                    <Label text="Book name"/>
+                    <TextField fx:id="input" onKeyPressed="#onInputKeyPressed" HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="searchButton" text="Search" onMouseClicked="#onSearchClicked"/>
+                </HBox>
+
+                <WebView fx:id="browser" VBox.vgrow="ALWAYS" style="-fx-border-color: lightgray; -fx-border-width: 1;"/>
+
+                <HBox spacing="10.0" alignment="CENTER">
+                    <Button fx:id="addButton" text="Add" onMouseClicked="#onAddClicked"/>
+                    <Button fx:id="sortButton" text="Sort" onMouseClicked="#onSortClicked"/>
+                    <Button fx:id="deleteButton" text="Delete" onMouseClicked="#onDeleteClicked"/>
+                    <Button fx:id="saveButton" text="Save" onMouseClicked="#onSaveClicked"/>
+                    <Button fx:id="loadButton" text="Load" onMouseClicked="#onLoadClicked"/>
+                    <Button fx:id="importButton" text="Import" onMouseClicked="#onImportClicked"/>
+                    <Button fx:id="exportButton" text="Export" onMouseClicked="#onExportClicked"/>
+                </HBox>
+
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label fx:id="lastChangeDate" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lastEditor" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="shelf" HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+
+        </SplitPane>
+
+        <VBox spacing="5.0" style="-fx-border-color: gray; -fx-border-width: 1; -fx-padding:5;" VBox.vgrow="ALWAYS" fx:id="consoleWindow">
+            <Label text="Console" style="-fx-font-weight:bold;"/>
+            <TextArea fx:id="consoleOutput" editable="false" wrapText="true" prefRowCount="4" VBox.vgrow="ALWAYS"/>
+            <TextField fx:id="consoleInput" onAction="#onConsoleCommandEntered" promptText="Enter command..." HBox.hgrow="ALWAYS"/>
+        </VBox>
+
+    </SplitPane>
+
 </VBox>
