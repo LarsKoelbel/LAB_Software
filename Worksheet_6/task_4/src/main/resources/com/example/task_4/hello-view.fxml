@@ -28,6 +28,19 @@
 
     <MenuBar VBox.vgrow="NEVER" fx:id="menu">
         <menus>
+            <Menu text="File">
+                <items>
+                    <MenuItem text="Save" onAction="#onSaveClicked"/>
+                    <MenuItem text="Load" onAction="#onLoadClicked"/>
+                    <MenuItem text="Import" onAction="#onImportClicked"/>
+                    <Menu text="Export as">
+                        <items>
+                            <MenuItem text="BibTex" onAction="#onExportBibTex"/>
+                            <MenuItem text="Human readable" onAction="#onExportHR"/>
+                        </items>
+                    </Menu>
+                </items>
+            </Menu>
             <Menu text="CLI">
                 <items>
                     <MenuItem text="Show/ Hide CLI Window" onAction="#onToggleCLI"/>
@@ -79,16 +92,6 @@
                 </HBox>
 
                 <WebView fx:id="browser" VBox.vgrow="ALWAYS" style="-fx-border-color: lightgray; -fx-border-width: 1;"/>
-
-                <HBox spacing="10.0" alignment="CENTER">
-                    <Button fx:id="addButton" text="Add" onMouseClicked="#onAddClicked"/>
-                    <Button fx:id="sortButton" text="Sort" onMouseClicked="#onSortClicked"/>
-                    <Button fx:id="deleteButton" text="Delete" onMouseClicked="#onDeleteClicked"/>
-                    <Button fx:id="saveButton" text="Save" onMouseClicked="#onSaveClicked"/>
-                    <Button fx:id="loadButton" text="Load" onMouseClicked="#onLoadClicked"/>
-                    <Button fx:id="importButton" text="Import" onMouseClicked="#onImportClicked"/>
-                    <Button fx:id="exportButton" text="Export" onMouseClicked="#onExportClicked"/>
-                </HBox>
 
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
                     <Label fx:id="lastChangeDate" HBox.hgrow="ALWAYS"/>

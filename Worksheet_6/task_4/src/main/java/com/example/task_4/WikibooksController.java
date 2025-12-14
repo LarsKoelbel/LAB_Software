@@ -8,6 +8,7 @@ import com.example.task_4.library_project.Library.io.Communication;
 import com.example.task_4.library_project.Library.io.Message;
 import com.example.task_4.library_project.Library.io.ProcessOutputBuffer;
 import com.example.task_4.library_project.Library.io.Severity;
+import com.example.task_4.library_project.Library.persistency.HumanReadablePersistency;
 import com.example.task_4.library_project.Library.user_interface.CLI;
 import com.example.task_4.library_project.Library.user_interface.ICLIHelpContainer;
 import com.example.task_4.library_project.Library.user_interface.NullCLI;
@@ -25,8 +26,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -49,7 +53,6 @@ public class WikibooksController {
     public Label shelf;
     public TextField consoleInput;
     public TextArea consoleOutput;
-    public Button addButton;
     public Button backButton;
     public ComboBox<String> synonymComboBox;
     public Button nextButton;
@@ -60,12 +63,6 @@ public class WikibooksController {
     public Button sortArchiveButton;
     public ListView<String> archiveListView;
     public Button searchButton;
-    public Button sortButton;
-    public Button deleteButton;
-    public Button saveButton;
-    public Button loadButton;
-    public Button importButton;
-    public Button exportButton;
 
     private MultipleSelectionModel<String> synonymSelectionModel;
 
@@ -85,7 +82,6 @@ public class WikibooksController {
         // Set a default page
         browser.getEngine().load("https://en.wikibooks.org");
         cli.init();
-        addButton.setDisable(true);
 
         // Add global event filter
         root.addEventFilter(javafx.event.Event.ANY, event -> {
@@ -171,7 +167,6 @@ public class WikibooksController {
             lastEditor.setText(elmed.getContributor());
             shelf.setText(elmed.getShelf());
             tempMedBuffer = medium;
-            addButton.setDisable(false);
         }else
         {
             tempMedBuffer = null;
@@ -239,7 +234,6 @@ public class WikibooksController {
         tempMedBuffer.setInventoryID(Library.collection.getNextID(Communication.NULL_BUFFER));
         Library.collection.addMedium(tempMedBuffer);
         tempMedBuffer = null;
-        addButton.setDisable(true);
     }
 
     public void onSortClicked(MouseEvent mouseEvent) {
@@ -256,32 +250,40 @@ public class WikibooksController {
         else showSuccessDialog("Medium deleted", "Medium deleted successfully", out.toString());
     }
 
-    public void onSaveClicked(MouseEvent mouseEvent) {
+    public void onSaveClicked(ActionEvent mouseEvent) {
+
+        String path = showFileDialog((Stage) root.getScene().getWindow(), true);
+        if (path == null) return;
+
         ProcessOutputBuffer out = new ProcessOutputBuffer(null);
-        new SaveBinary().call(new String[] {"default"},out, new NullCLI());
+        new SaveBinary().call(new String[] {path},out, new NullCLI());
         if (out.getMostSevere().getSeverity().compareTo(Severity.WARNING) >= 0) showProcessOutputBufferInErrorDialog(out);
         else showSuccessDialog("Archive saved", "Archive saved successfully", out.toString());
     }
 
-    public void onLoadClicked(MouseEvent mouseEvent) {
+    public void onLoadClicked(ActionEvent mouseEvent) {
+
+        String path = showFileDialog((Stage) root.getScene().getWindow(), false);
+        if (path == null) return;
+
         ProcessOutputBuffer out = new ProcessOutputBuffer(null);
-        new LoadBinary().call(new String[] {"default"},out, new NullCLI());
+        new LoadBinary().call(new String[] {path},out, new NullCLI());
         if (out.getMostSevere().getSeverity().compareTo(Severity.WARNING) >= 0) showProcessOutputBufferInErrorDialog(out);
         else showSuccessDialog("Archive loaded", "Archive saved successfully from binary file", out.toString());
+        updateArchiveListView();
     }
 
-    public void onExportClicked(MouseEvent mouseEvent) {
-        ProcessOutputBuffer out = new ProcessOutputBuffer(null);
-        new SaveBibtex().call(new String[] {"default"},out, new NullCLI());
-        if (out.getMostSevere().getSeverity().compareTo(Severity.WARNING) >= 0) showProcessOutputBufferInErrorDialog(out);
-        else showSuccessDialog("Archive exported", "Archive exported successfully", out.toString());
-    }
+    public void onImportClicked(ActionEvent mouseEvent) {
 
-    public void onImportClicked(MouseEvent mouseEvent) {
+        String path = showFileDialog((Stage) root.getScene().getWindow(), false);
+        if (path == null) return;
+
         ProcessOutputBuffer out = new ProcessOutputBuffer(null);
-        new LoadBibtex().call(new String[] {"default"},out, new NullCLI());
+        new LoadBibtex().call(new String[] {path},out, new NullCLI());
         if (out.getMostSevere().getSeverity().compareTo(Severity.WARNING) >= 0) showProcessOutputBufferInErrorDialog(out);
         else showSuccessDialog("Archive imported", "Archive imported successfully", out.toString());
+
+        updateArchiveListView();
     }
 
     public void onConsoleCommandEntered(ActionEvent actionEvent) {
@@ -479,5 +481,62 @@ public class WikibooksController {
 
     public void synonymListViewEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) synonymArea.synonymListViewClicked(null);
+    }
+
+    private String lastPath = null;
+
+    public String showFileDialog(Stage ownerStage, boolean isSaveDialog) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export file");
+
+        if (lastPath != null) fileChooser.setInitialDirectory(new File(lastPath));
+
+        File file = null;
+
+        if (isSaveDialog) file = fileChooser.showSaveDialog(ownerStage);
+        else file = fileChooser.showOpenDialog(ownerStage);
+
+        lastPath = file.getParentFile().getPath();
+
+        return file.getPath();
+    }
+
+    /**
+     * Export to a bibtex os a hr file
+     * @param filetype Type of file to export
+     */
+    private void exportAs(String filetype)
+    {
+        String path = showFileDialog((Stage) root.getScene().getWindow(), true);
+        if (path == null) return;
+        ProcessOutputBuffer out = new ProcessOutputBuffer(null);
+
+        switch (filetype)
+        {
+            case "bibtex" -> new SaveBibtex().call(new String[] {path},out, new NullCLI());
+            case "hr" -> {
+                try
+                {
+                    HumanReadablePersistency hr = new HumanReadablePersistency();
+                    hr.save(Library.collection, path);
+                    out.write("Archive exportes successfully to: " + path, Severity.SUCCESS);
+                }catch (Exception e)
+                {
+                    out.write("Filed to export archive: " + e.getMessage(), Severity.ERROR);
+                }
+
+            }
+        }
+
+        if (out.getMostSevere().getSeverity().compareTo(Severity.WARNING) >= 0) showProcessOutputBufferInErrorDialog(out);
+        else showSuccessDialog("Archive exported", "Archive exported successfully", out.toString());
+    }
+
+    public void onExportBibTex(ActionEvent actionEvent) {
+        exportAs("bibtex");
+    }
+
+    public void onExportHR(ActionEvent actionEvent) {
+        exportAs("hr");
     }
 }
