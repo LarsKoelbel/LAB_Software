@@ -5,20 +5,43 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task_3.ListController">
-   <children>
-      <VBox prefHeight="400.0" prefWidth="501.0">
-         <children>
-            <TextField id="input" fx:id="input" />
-            <ListView id="list" fx:id="list" prefHeight="200.0" prefWidth="200.0" />
-         </children>
-      </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <Button id="addButton" maxWidth="100.0" mnemonicParsing="false" onMouseClicked="#add" prefWidth="100.0" text="Add" />
-            <Button id="resetButton" maxHeight="100.0" mnemonicParsing="false" onMouseClicked="#reset" prefWidth="100.0" text="Reset" />
-         </children>
-      </VBox>
-   </children>
+<HBox spacing="10"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.task_3.ListController">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <children>
+
+        <!-- Main content -->
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <children>
+                <TextField fx:id="input"/>
+
+                <ListView fx:id="list"
+                          VBox.vgrow="ALWAYS"/>
+            </children>
+        </VBox>
+
+        <!-- Buttons -->
+        <VBox spacing="5">
+            <children>
+                <Button fx:id="addButton"
+                        text="Add"
+                        prefWidth="100"
+                        onMouseClicked="#add"/>
+
+                <Button fx:id="resetButton"
+                        text="Reset"
+                        prefWidth="100"
+                        onMouseClicked="#reset"/>
+            </children>
+        </VBox>
+
+    </children>
 </HBox>
