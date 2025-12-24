@@ -16,7 +16,7 @@ public class WikibooksApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WikibooksApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1920 * SCALE, 1080 * SCALE);
-        stage.setTitle("Itsy bitsy tini wini WikiBooks search machini");
+        stage.setTitle("Wikibooks archive management system");
 
         // Set icon
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(
